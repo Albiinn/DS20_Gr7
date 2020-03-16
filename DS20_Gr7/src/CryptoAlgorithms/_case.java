@@ -1,3 +1,4 @@
+package CryptoAlgorithms;
 class _case {
 	
 	public static void lower(String s) {
