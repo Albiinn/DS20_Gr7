@@ -51,7 +51,9 @@ public class ds {
 			default: System.out.println("Thirr lower ose upper, capitalize, inverse, alternating, sentence");
 				break;
 			}
+			break;
 			default: System.out.println("Enkripto me beale, tap-code, apo case");
+			break;
 		}
 		
 	}
