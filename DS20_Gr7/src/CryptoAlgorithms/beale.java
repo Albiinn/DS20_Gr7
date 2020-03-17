@@ -58,14 +58,12 @@ public class beale {
 		
 		for(int i=0; i<numbers.length; i++) {
 			input = new Scanner(file);
-			if(numbers[i]>a.length) {
+			if(file.length()<numbers[i]) {
 				System.out.println("Te hyra jo valide");
 				System.exit(3);
 			}
-			
 			while(input.hasNext()) {
 				String emri = input.next().toLowerCase();
-				
 				if(numbers[i]==rez) {
 					decipher[i]=emri.charAt(0);
 					System.out.print(decipher[i]);
