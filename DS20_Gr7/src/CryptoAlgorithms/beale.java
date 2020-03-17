@@ -1,36 +1,22 @@
 package CryptoAlgorithms;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class beale {
+	
 	public static void encrypt(String path, String plaintext) throws Exception {
 		Scanner input=null;
 		String emri=null;
 		int rez=1;
 		char[] letter=plaintext.toCharArray();
 		
-		File file = new File(path);
-			
-		if(file.exists()) {
-				System.out.println("Fajlli ekzsiton (provo emer tjeter)");
-				System.exit(2);
-			}
-		
-			PrintWriter output = new PrintWriter(file);	
-			output.println("Korona arriti pothuajse ne cdo vend. Bartes i virusit eshte lakuriqi, maceja etj.");
-			output.println("Heshtja dhe qetesia kane kapluar te gjitha vendet");
-			output.println("Virusi sulmon organet e frymemarrjes");
-			output.println("Nese hundet ju rrjedhin, atehere jeni infektuar");
-			output.println("Jane shfaqur kater personat e pare te infektuar, me inicialet ZY, YZ, XU, UX");
-			output.close();
-			
-		
 			int[] cipher = new int[letter.length];
 			
 			for(int i=0; i<letter.length; i++) {
-				input=new Scanner(file);
+				input=new Scanner(book(path));
 				
 				while(input.hasNext()) {
 				emri=input.next().toLowerCase();
@@ -61,19 +47,10 @@ public class beale {
 		}
 		
 		File file = new File(path);
-		
-		if(file.exists()) {
-			System.out.println("Fajlli ekziston (provo emer tjeter)");
+		if(!file.exists()) {
+			System.out.println("Fajlli nuk ekzsiton");
 			System.exit(2);
 		}
-		
-		PrintWriter output = new PrintWriter(file);	
-		output.println("Korona arriti pothuajse ne cdo vend. Bartes i virusit eshte lakuriqi, maceja etj.");
-		output.println("Heshtja dhe qetesia kane kapluar te gjitha vendet");
-		output.println("Virusi sulmon organet e frymemarrjes");
-		output.println("Nese hundet ju rrjedhin, atehere jeni infektuar");
-		output.println("Jane shfaqur kater personat e pare te infektuar, me inicialet ZY, YZ, XU, UX");
-		output.close();
 		
 		char[] decipher = new char[numbers.length];
 		int rez=1;
@@ -98,5 +75,19 @@ public class beale {
 			}
 		}
 		input.close();
-	};
+	}
+
+	
+	
+	public static File book(String path) throws FileNotFoundException {
+		File file=new File(path);
+		PrintWriter output = new PrintWriter(file);	
+		output.println("Korona arriti pothuajse ne cdo vend. Bartes i virusit eshte lakuriqi, maceja etj.");
+		output.println("Heshtja dhe qetesia kane kapluar te gjitha vendet");
+		output.println("Virusi sulmon organet e frymemarrjes");
+		output.println("Nese hundet ju rrjedhin, atehere jeni infektuar");
+		output.println("Jane shfaqur kater personat e pare te infektuar, me inicialet ZY, YZ, XU, UX");
+		output.close();
+		return file;
+	}
 }

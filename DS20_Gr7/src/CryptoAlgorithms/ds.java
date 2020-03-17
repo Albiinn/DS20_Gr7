@@ -13,8 +13,9 @@ public class ds {
 		switch (args[0]) {
 		
 		case "beale": 
+		
 			switch (args[1]) {
-			case "encrypt": beale.encrypt(args[2], args[3]);
+			case "encrypt": beale.book(args[2]); beale.encrypt(args[2], args[3]); 
 				break;
 			case "decrypt": beale.decrypt(args[2], args[3]);
 				break;
