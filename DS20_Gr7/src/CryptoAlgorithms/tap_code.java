@@ -39,7 +39,11 @@ class tap_code {
 		char[][] tabela=matrica();
 		String[] rreshti=ciphertext.split("  ");
 		for(int i=0; i<rreshti.length; i++) {
-			String[] kolona=rreshti[i].split(" ");		
+			String[] kolona=rreshti[i].split(" ");	
+			if(kolona[i].length()>5) {
+				System.out.println("Te hyra jo valide");
+				System.exit(2);
+			}
 			System.out.print(tabela[kolona[0].length()-1][kolona[1].length()-1]);
 		}
 		
