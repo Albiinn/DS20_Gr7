@@ -1,8 +1,12 @@
 package CryptoAlgorithms;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class ds {
 
 	public static void main(String[] args) {
+		
 		if(args.length<3) {
 			System.out.println("Argumentet mungojne ose jane jo-valide");
 			System.exit(1);
@@ -13,7 +17,6 @@ public class ds {
 		switch (args[0]) {
 		
 		case "beale": 
-		
 			switch (args[1]) {
 			case "encrypt": beale.book(args[2]); beale.encrypt(args[2], args[3]); 
 				break;
@@ -53,11 +56,17 @@ public class ds {
 				break;
 			}
 			break;
-			default: System.out.println("Enkripto me beale, tap-code, apo case");
+		default: System.out.println("Enkripto me beale, tap-code, apo case");
 			break;
 		}
 		
-	}
+	}	
+		catch(FileNotFoundException ex) {
+			ex.getMessage();
+		}
+		catch(IOException ex) {
+			ex.getMessage();
+		}
 		 catch (Exception ex) {
 			ex.getMessage();
 		}

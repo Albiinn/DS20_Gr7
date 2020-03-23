@@ -38,6 +38,7 @@ class tap_code {
 	public static void decode(String ciphertext) {
 		char[][] tabela=matrica();
 		String[] rreshti=ciphertext.split("  ");
+		char[] letter = new char[rreshti.length];
 		
 		for(int i=0; i<rreshti.length; i++) {
 			String[] kolona=rreshti[i].split(" ");
@@ -45,9 +46,13 @@ class tap_code {
 			if(kolona[0].length()>5 || kolona[1].length()>5) {
 				System.out.println("Te hyra jo valide");
 				System.exit(2);
-			}
-			System.out.print(tabela[kolona[0].length()-1][kolona[1].length()-1]);
+			} 
+			letter[i] = tabela[kolona[0].length()-1][kolona[1].length()-1];
 		}
+		for(char c:letter) {
+			System.out.print(c);
+		}
+		
 		
 	};
 	
