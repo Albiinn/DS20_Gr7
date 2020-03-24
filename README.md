@@ -17,7 +17,7 @@ Programi eshte i shenuar ne gjuhen programuese Java
 ## Hapat per ekzekutimin e programit:
 
 1. Hapeni nje folder ne nje direction psh ne Desktop, dhe i vendosni emrin CryptoAlgorithms.
-2. Tek ky folder, hapini 4 Text Document ku secilit file i vendosni emrin e klases perkatese dhe i ndryshoni file extension-in nga .text ne .java.
+2. Tek ky folder, hapini 4 Text Document ku secilit file i vendosni emrin e klases perkatese dhe i ndryshoni file extension-in nga .txt ne .java.
 3. Kopjoni kodin burimor ne repo dhe permes nje editori psh Notepad, seciles klase ia vendosni kodin perkates.
 4. Hapeni terminalin (cmd apo git bash) ne Desktop dhe shenoni javac CryptoAlgorithms/ds.java ne menyre qe te beni compile programin.
 
@@ -52,9 +52,9 @@ pershendetje
 ### Komanda tap-code:
 
 java CryptoAlgorithms/ds tap-code encode "neser"\
-... ...   . .....   .... ...   . .....   .... ..
+... ...&ensp;. .....&ensp;.... ...&ensp;. .....&ensp;.... ..
 
-java CryptoAlgorithms/ds tap-code decode "... ...  . .....  .... ...  . .....  .... .."\
+java CryptoAlgorithms/ds tap-code decode "... ...&ensp;. .....&ensp;.... ...&ensp;. .....&ensp;.... .."\
 neser
 
 ### Komanda case:
