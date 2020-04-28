@@ -3,6 +3,7 @@ package CryptoAlgorithms;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+
 public class ds {
 
 	public static void main(String[] args) {
@@ -56,6 +57,12 @@ public class ds {
 				break;
 			}
 			break;
+			
+		case "create-user":
+			create_user obj1 = new create_user();
+			obj1.MbusheFajllin(args[1]);
+			break;
+			
 		default: System.out.println("Enkripto me beale, tap-code, apo case");
 			break;
 		}
