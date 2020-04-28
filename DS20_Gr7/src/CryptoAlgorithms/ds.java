@@ -68,6 +68,11 @@ public class ds {
 			obj1.MbusheFajllin(args[1]);
 			break;
 			
+		case "delete-user":
+			delete_user obj2 = new delete_user();
+			obj2.delete(args[1]);
+			break;
+			
 		default: System.out.println("Enkripto me beale, tap-code, apo case");
 			break;
 		}
