@@ -178,8 +178,14 @@ public class create_user {
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource source = new DOMSource(doc);
 		
-		File filePub = new File("keys//"+emri+".pub.xml");
-		File file = new File("keys//"+emri+".xml");
+		//krijimi i folderit keys
+		File keys = new File("c://keys");
+		keys.mkdir();
+		
+		//krijimi i fileve per celesa
+		File filePub = new File(keys.getPath()+"//"+emri+".pub.xml");
+		File file = new File(keys.getPath()+"//"+emri+".xml");
+		
 		
 		if(file.exists() || filePub.exists()) {
 			System.out.println("Gabim: Celesi "+emri+" ekziston paraprakisht.");

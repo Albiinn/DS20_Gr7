@@ -2,13 +2,18 @@ package CryptoAlgorithms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 
 public class ds {
 
 	public static void main(String[] args) {
 		
-		if(args.length<3) {
+		if(args.length<2) {
 			System.out.println("Argumentet mungojne ose jane jo-valide");
 			System.exit(1);
 		}
@@ -68,6 +73,18 @@ public class ds {
 		}
 		
 	}	
+		catch(NoSuchAlgorithmException ex) {
+			ex.getMessage();
+		}
+		catch(InvalidKeySpecException ex) {
+			ex.getMessage();
+		}
+		catch(ParserConfigurationException ex) {
+			ex.getMessage();
+		}
+		catch(TransformerException ex) {
+			ex.getMessage();
+		}
 		catch(FileNotFoundException ex) {
 			ex.getMessage();
 		}
