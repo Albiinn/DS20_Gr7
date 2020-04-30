@@ -119,7 +119,7 @@ public class export_key {
 				File fromfile = new File(keys.getPath()+"//"+emri+".pub.xml");
 				
 				if (!fromfile.exists()) {
-					System.out.println("Celesi publik "+emri+" nuk ekziston");
+					System.out.println("Gabim: Celesi publik "+emri+" nuk ekziston");
 					System.exit(1);
 				}
 				
@@ -162,7 +162,7 @@ public class export_key {
 				File fromfile = new File(keys.getPath()+"//"+emri+".xml");
 				
 				if (!fromfile.exists()) {
-					System.out.println("Celesi privat "+emri+" nuk ekziston");
+					System.out.println("Gabim: Celesi privat "+emri+" nuk ekziston");
 					System.exit(1);
 				}
 				

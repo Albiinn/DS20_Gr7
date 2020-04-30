@@ -63,8 +63,7 @@ public class import_key {
 				i++;
 			}
 			
-			return 0;
-			
+			return k;
 		}
 	
 		public static void ImportToFrom(String emri, String shtegu) throws ParserConfigurationException, SAXException, IOException, TransformerException {
@@ -74,18 +73,17 @@ public class import_key {
 				http(emri, shtegu);
 			}
 			
-			//kthe 1 nese eshte celes privat, 0 per publik
-			int k = PrivOrPub(shtegu);
-			
-            if(k==1) {
+			else {
+				//kthen 1 nese eshte celes privat, 0 per publik
+				int k = PrivOrPub(shtegu);
+				if(k==1) {
 				priv(emri, shtegu); 
 				pub(emri, shtegu);
 			}
-			
-			else if(k==0) {
+				else if(k==0) {
 				pub(emri,shtegu);
+				}
 			}
-			
 		}
 		
 		public static void http(String emri, String shtegu) throws IOException, ParserConfigurationException, TransformerException {
