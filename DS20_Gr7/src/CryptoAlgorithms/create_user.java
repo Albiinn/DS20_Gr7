@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
 
 public class create_user {
 
-	private RSAPublicKeySpec rsaPubKeySpec = null;
-	private RSAPrivateKeySpec rsaPrivKeySpec = null;
-	private RSAPrivateCrtKey rsaPrivCrtKey = null;
+	private static RSAPublicKeySpec rsaPubKeySpec = null;
+	private static RSAPrivateKeySpec rsaPrivKeySpec = null;
+	private static RSAPrivateCrtKey rsaPrivCrtKey = null;
 	
 	//konstruktori qe thirr metoden KEY, per gjenerim te celesave
 	public create_user() throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -105,7 +105,7 @@ public class create_user {
 	}
 	
 	//Ruajtja e celesave publik e privat ne xml fajlla te ndare
-	public void MbusheFajllin(String emri) throws ParserConfigurationException, TransformerException, FileNotFoundException, NoSuchAlgorithmException {
+	public static void MbusheFajllin(String emri) throws ParserConfigurationException, TransformerException, FileNotFoundException, NoSuchAlgorithmException {
 		
 		Base64.Encoder encoder = Base64.getEncoder();
 		
@@ -203,6 +203,7 @@ public class create_user {
 
 	  }
 }
+	
 
 	
 

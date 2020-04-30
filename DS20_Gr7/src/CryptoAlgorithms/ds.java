@@ -8,6 +8,8 @@ import java.security.spec.InvalidKeySpecException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.xml.sax.SAXException;
+
 
 public class ds {
 
@@ -64,20 +66,35 @@ public class ds {
 			break;
 			
 		case "create-user":
-			create_user obj1 = new create_user();
-			obj1.MbusheFajllin(args[1]);
+			create_user o = new create_user();
+			create_user.MbusheFajllin(args[1]);
 			break;
 			
 		case "delete-user":
-			delete_user obj2 = new delete_user();
-			obj2.delete(args[1]);
+			delete_user.delete(args[1]);
 			break;
 			
-		default: System.out.println("Enkripto me beale, tap-code, apo case");
+		case "export-key":
+			if(args.length==3) {
+				export_key.CallPublicOrPrivate(args[1], args[2], "a");
+			}
+			else {
+				export_key.CallPublicOrPrivate(args[1], args[2], args[3]);
+			}
+			break;
+			
+		case "import-key":
+			import_key.ImportToFrom(args[1], args[2]);
+			break;
+			
+		default: System.out.println("Kryej veprime me beale, tap-code, case, create-user, delete-user, export-key");
 			break;
 		}
 		
 	}	
+		catch(SAXException ex) {
+			ex.getMessage();
+		}
 		catch(NoSuchAlgorithmException ex) {
 			ex.getMessage();
 		}

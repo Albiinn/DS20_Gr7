@@ -3,7 +3,8 @@ package CryptoAlgorithms;
 import java.io.File;
 
 public class delete_user {
-	public void delete(String emri) {
+	
+	public static void delete(String emri) {
 		
 		//dir e celesave
 		File keys = new File("c://keys");
@@ -24,6 +25,26 @@ public class delete_user {
 			}
 		}
 		
+		else if(filePub.exists()) {
+			
+			if(filePub.delete()) {
+				System.out.println("Eshte larguar celesi publik "+filePub.getPath());
+			}
+			else {
+				System.out.println("Fshirja nuk u realizua");
+			}
+		
+		}
+		
+		else if(file.exists()) {
+			
+			if(file.delete()) {
+				System.out.println("Eshte larguar celesi privat "+file.getPath());
+			}
+			else {
+				System.out.println("Fshirja nuk u realizua");
+			}
+		}
 		else {
 			System.out.println("Gabim: Celesi "+emri+" nuk ekziston.");
 		}
