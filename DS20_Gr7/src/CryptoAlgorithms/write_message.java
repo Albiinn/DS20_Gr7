@@ -8,12 +8,12 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
-import java.util.Random;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -32,13 +32,16 @@ import org.xml.sax.SAXException;
 public class write_message {
 	
 	private static Cipher encryptCipher;
-	private static byte[] IV = new byte[8];
-	
 	
 	public static void Encrypt(String emri, String mesazhi, String shtegu) throws ParserConfigurationException, SAXException, IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeySpecException {
 		
 		Base64.Encoder encoder = Base64.getEncoder(); 
-		AlgorithmParameterSpec iv = new IvParameterSpec(IV);
+		
+		SecureRandom sr = new SecureRandom();
+		byte[] IV = new byte[8];
+		sr.nextBytes(IV);
+
+		IvParameterSpec iv = new IvParameterSpec(IV);
 
 		SecretKey key = KeyGenerator.getInstance("DES").generateKey();
 
@@ -79,10 +82,6 @@ public class write_message {
 	}
 	
 	private static byte[] DESencrypt(String mesazhi, AlgorithmParameterSpec iv, SecretKey key) throws NoSuchAlgorithmException, NoSuchPaddingException, ParserConfigurationException, SAXException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
-		
-		//random IV
-		Random random = new Random();
-		random.nextBytes(IV);
 		
 		//zgjedh algoritmin dhe moden (encrypt ose decrypt)
 		encryptCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
@@ -135,4 +134,5 @@ public class write_message {
 		
 		return new RSAPublicKeySpec(Modulus, Exponent);
 	}	
+	
 }

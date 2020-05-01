@@ -87,7 +87,21 @@ public class ds {
 			import_key.ImportToFrom(args[1], args[2]);
 			break;
 			
-		default: System.out.println("Kryej veprime me beale, tap-code, case, create-user, delete-user, export-key");
+		case "write-message":
+			if(args.length==4) {
+				write_message.Encrypt(args[1], args[2], args[3]);
+			}
+			else {
+				write_message.Encrypt(args[1], args[2], "a");
+			}
+			break;
+			
+		case "read-message":
+			read_message.Decrypt(args[1]);
+			break;
+			
+		default: System.out.println("Kryej veprime me beale, tap-code, case, "
+				+ "create-user, delete-user, export-key, import-key, write-message, apo me read-message");
 			break;
 		}
 		

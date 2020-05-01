@@ -74,6 +74,12 @@ public class import_key {
 			}
 			
 			else {
+				
+				if(!shtegu.contains(".xml")) {
+					System.out.println("Gabim: Fajlli i dhene nuk eshte celes valid.");
+					System.exit(1);
+				}
+				
 				//kthen 1 nese eshte celes privat, 0 per publik
 				int k = PrivOrPub(shtegu);
 				if(k==1) {
@@ -122,7 +128,6 @@ public class import_key {
 			
 		}
 			
-		
 		public static void KrijimiXML(String emri, String modul, String exponent) throws ParserConfigurationException, TransformerException {
 		
 			DocumentBuilderFactory docFactoryHTTP = DocumentBuilderFactory.newInstance();
@@ -155,12 +160,16 @@ public class import_key {
 			
 		}
 
-		
 		public static void priv(String emri, String shtegu) throws ParserConfigurationException, SAXException, IOException, TransformerException {
 			
 			File dir = new File("c://Users//hp//Desktop//exported_keys");
 			dir.mkdir();
 			File fromfile = new File(dir.getPath()+"//"+shtegu);
+
+			if(!fromfile.exists()) {
+				System.out.println("Gabim: Fajlli i dhene "+fromfile.getPath()+"nuk ekziston");
+				System.exit(1);
+			}
 			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -190,6 +199,11 @@ public class import_key {
 			File dir = new File("c://Users//hp//Desktop//exported_keys");
 			dir.mkdir();
 			File fromfile = new File(dir.getPath()+"//"+shtegu);
+			
+			if(!fromfile.exists()) {
+				System.out.println("Gabim: Fajlli i dhene "+fromfile.getPath()+"nuk ekziston");
+				System.exit(1);
+			}
 			
 			//fute file-n ne nje document
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

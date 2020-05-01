@@ -137,10 +137,7 @@ public class export_key {
 				
 				File dir = new File("c://Users//hp//Desktop//exported_keys");
 				dir.mkdir();
-				File file = new File(dir.getPath()+"//"+shtegu+".pub.xml");
-				//File exportTo = new File("c://Users//hp//exported");
-				//exportTo.mkdir();
-				//File file = new File(exportTo.getPath()+"//"+shtegu+".pub.xml");
+				File file = new File(dir.getPath()+"//"+shtegu.replace(".xml", "")+".pub.xml");
 				
 				if(shtegu.equals("a")) {
 					result = new StreamResult(System.out);
@@ -179,7 +176,7 @@ public class export_key {
 				
 				File dir = new File("c://Users//hp//Desktop//exported_keys");
 				dir.mkdir();
-				File file = new File(dir.getPath()+"//"+shtegu+".xml");
+				File file = new File(dir.getPath()+"//"+shtegu);
 				
 				if(shtegu.equals("a")) {
 					result = new StreamResult(System.out);

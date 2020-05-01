@@ -12,7 +12,10 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -29,42 +32,71 @@ import org.xml.sax.SAXException;
 
 public class read_message {
 	
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, InvalidAlgorithmParameterException, ParserConfigurationException, SAXException, IOException {
-		read_message.Decrypy("YWxiaW4=.fm6FcmloKps=.WB/0RWEE2bve/P81Zo9dzpnRfx9GLclHC5gkAOKJqfu6neL3Fa"
-				+ "GinnCXhy65rd4t6fV9go5SnCdFDMpoD6cDCymZuBDRWb91Vvf30pA4pD/0xP4zG8o5yDi/2/fUyL6NRbfn/73COTRW8dj9sv63KPm"
-				+ "JwmhbV57t95fXzBwyfMx7N7fgqzW2iGjl0huJlwkFFmOseY3LCW//0bHVCiZ8zplcZeAPGnhxdtkw0I1N0qHIxMzKRvi0HJNeGO9TgoG5SW15"
-				+ "v1McLrpCKLmg6yUcLJDuFkiuQNPXg8lyV7+SkTwCty7zAqp"
-				+ "6KT29g8yZkPduPMtO3tyTUTtwthZ5ry/sLw==.rHQxJS4DCtpRr+puRuBmZw==");
-	}
+private static Cipher decryptCipher;
 	
-	private static Cipher decryptCipher;
+	public static void Decrypt(String mesazhi) throws ParserConfigurationException, SAXException, IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, InvalidAlgorithmParameterException {
+		
+		byte[] decodedemri;
+		String emri;
+		
+		byte[] decodediv;
+		
+		byte[] decodedEncryptedKey;
+
+		byte[] decodedEncryptedMessage;
 	
-	public static void Decrypy(String mesazhi) throws ParserConfigurationException, SAXException, IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, InvalidAlgorithmParameterException {
-		String[] a = mesazhi.split("\\.");
-;
-		byte[] decodedemri = Base64.getDecoder().decode(a[0]);
-		String emri = new String(decodedemri);
 		
-		byte[] decodediv = Base64.getDecoder().decode(a[1]);
-		String iv = new String(decodediv);
+		if(mesazhi.contains(".txt")) {
+			
+			File file = new File(mesazhi);
+			
+			if(!file.exists()) {
+				System.out.println("Gabim: Nuk ekziston fajlli i tille");
+				System.exit(1);
+			}
+			
+			Scanner input = new Scanner(file);
+			ArrayList<String> sa = new ArrayList<String>();
+			
+			while(input.hasNextLine()) {
+				sa.add(input.nextLine());
+			}	
+			
+			decodedemri = Base64.getDecoder().decode(sa.get(0));
+			emri = new String(decodedemri);
+			
+			decodediv = Base64.getDecoder().decode(sa.get(1));
+			
+			decodedEncryptedKey = Base64.getDecoder().decode(sa.get(2));
+	
+			decodedEncryptedMessage = Base64.getDecoder().decode(sa.get(3));
 		
-		byte[] decodedEncryptedKey = Base64.getDecoder().decode(a[2]);
-		String EncryptedKey = new String(decodedEncryptedKey);
+		}
 		
-		byte[] decodedEncryptedMessage = Base64.getDecoder().decode(a[3]);
-		String EncryptedMessage = new String(decodedEncryptedMessage);
+		else {
+		
+			String[] a = mesazhi.split("\\.");
+
+			decodedemri = Base64.getDecoder().decode(a[0]);
+			emri = new String(decodedemri);
+			
+		    decodediv = Base64.getDecoder().decode(a[1]);
+			
+			decodedEncryptedKey = Base64.getDecoder().decode(a[2]);
+	
+			decodedEncryptedMessage = Base64.getDecoder().decode(a[3]);
+		
+		}
 		
 		RSAPrivateKeySpec RSAPrivKey = getPrivKey(emri);
 
-		byte[] DesKey = RSAdecrypt(RSAPrivKey, decodedEncryptedKey);
+		byte[] DesKey = RSAdecrypt(RSAPrivKey, decodedEncryptedKey); //decodedEncryptedKey
 
-		byte[] decryptedmesazh = DESencrypt(decodedEncryptedMessage, decodediv, DesKey);
-		
-		String M = decryptedmesazh.toString();
-		System.out.println(M);
-		
-		
-		
+		byte[] decryptedmesazh = DESencrypt(decodedEncryptedMessage, decodediv, DesKey); //decodedEncryptedMessage, decodediv, DesKey
+
+		String M = new String(decryptedmesazh, StandardCharsets.UTF_8);
+		System.out.println("Marresi: "+emri);
+		System.out.print("Mesazhi: "+M);
 	}
 	
 	private static byte[] DESencrypt(byte[] mesazhi, byte[] IV, byte[] key) throws NoSuchAlgorithmException, NoSuchPaddingException, ParserConfigurationException, SAXException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException {
@@ -75,10 +107,6 @@ public class read_message {
 		//zgjedh algoritmin dhe moden (encrypt ose decrypt)
 		decryptCipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
 		decryptCipher.init(Cipher.DECRYPT_MODE, desKey, iv);
-	
-
-		//merr byte e mesazhit
-		//byte[] input = mesazhi.getBytes();
 				
 		//decrypt
 		byte[] decipherText = decryptCipher.doFinal(mesazhi);
@@ -96,13 +124,8 @@ public class read_message {
 		RSAPrivateKey key = (RSAPrivateKey) keyFactory.generatePrivate(RSAPrivKey);
 		cipher.init(Cipher.DECRYPT_MODE, key );
 
-		//System.out.println(encoder.encodeToString(key.getPrivateExponent().toByteArray()));
-		//fut te dhenat ne algoritem
-		//cipher.update(DESKey);
-
 		//encrypto celesin e desit
 		byte[] cipherText = cipher.doFinal(DESKey);
-		System.out.println(cipherText.length);
 		return cipherText;
 	}
 	
@@ -114,11 +137,10 @@ public class read_message {
 		File fromfile = new File(keys.getPath()+"//"+emri+".xml");
 				
 		if(!fromfile.exists()) {
-			System.out.println("Gabim: Celesi privat +"+fromfile.getPath()+" nuk ekziston");
+			System.out.println("Gabim: Celesi privat "+fromfile.getPath()+" nuk ekziston");
 			System.exit(1);
 		}
 		
-		Base64.Encoder encoder = Base64.getEncoder();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document fromdoc = dBuilder.parse(fromfile);
