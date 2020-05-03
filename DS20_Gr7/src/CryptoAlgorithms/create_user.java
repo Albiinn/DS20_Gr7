@@ -58,23 +58,31 @@ public class create_user {
 	//algoritme per gjetjen e koeficienteve Chinese Remainder Theorem
 	//nga expinenti publik, exponenti privat si dhe moduli
 	private static BigInteger findFactor(BigInteger e, BigInteger d, BigInteger n) {
+		
 	    BigInteger edMinus1 = e.multiply(d).subtract(BigInteger.ONE);
 	    int s = edMinus1.getLowestSetBit();
 	    BigInteger t = edMinus1.shiftRight(s);
 
 	    for (int aInt = 2; true; aInt++) {
+	    	
 	        BigInteger aPow = BigInteger.valueOf(aInt).modPow(t, n);
+	        
 	        for (int i = 1; i <= s; i++) {
+	        	
 	            if (aPow.equals(BigInteger.ONE)) {
 	                break;
 	            }
+	            
 	            if (aPow.equals(n.subtract(BigInteger.ONE))) {
 	                break;
 	            }
+	            
 	            BigInteger aPowSquared = aPow.multiply(aPow).mod(n);
+	            
 	            if (aPowSquared.equals(BigInteger.ONE)) {
 	                return aPow.subtract(BigInteger.ONE).gcd(n);
 	            }
+	            
 	            aPow = aPowSquared;
 	        }
 	    }
@@ -90,16 +98,19 @@ public class create_user {
 	    BigInteger n = rsaPubSpec.getModulus();
 	    BigInteger p = findFactor(e, d, n);
 	    BigInteger q = n.divide(p);
+	    
 	    if (p.compareTo(q) > 0) {
 	        BigInteger t = p;
 	        p = q;
 	        q = t;
 	    }
+	    
 	    BigInteger exp1 = d.mod(p.subtract(BigInteger.ONE));
 	    BigInteger exp2 = d.mod(q.subtract(BigInteger.ONE));
 	    BigInteger coeff = q.modInverse(p);
 	    RSAPrivateCrtKeySpec keySpec = new RSAPrivateCrtKeySpec(n, e, d, p, q, exp1, exp2, coeff);
 	    KeyFactory kf = KeyFactory.getInstance("RSA");
+	    
 	    return (RSAPrivateCrtKey) kf.generatePrivate(keySpec);
 
 	}
@@ -130,7 +141,6 @@ public class create_user {
 		//mi formatu ne xml
 		transformerPub.setOutputProperty(OutputKeys.INDENT, "yes");
 		DOMSource sourcePub = new DOMSource(docPub);
-		
 		
 		//per celesin privat koeficientat e chinese remainder theorem
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -185,7 +195,6 @@ public class create_user {
 		//krijimi i fileve per celesa
 		File filePub = new File(keys.getPath()+"//"+emri+".pub.xml");
 		File file = new File(keys.getPath()+"//"+emri+".xml");
-		
 		
 		if(file.exists() || filePub.exists()) {
 			System.out.println("Gabim: Celesi "+emri+" ekziston paraprakisht.");

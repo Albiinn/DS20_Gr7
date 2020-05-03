@@ -70,7 +70,6 @@ public class export_key {
 		D.appendChild(doc.createTextNode(d));
 		rootElement.appendChild(D);
 		
-		
 		return doc;
 	}
 	
@@ -96,7 +95,6 @@ public class export_key {
 			rootElementPub.appendChild(ExponentPub);
 			
 			return doc;
-		
 	}
 	
 	
@@ -122,7 +120,6 @@ public class export_key {
 					System.out.println("Gabim: Celesi publik "+emri+" nuk ekziston");
 					System.exit(1);
 				}
-				
 		
 				DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

@@ -32,6 +32,11 @@ public class import_key {
 			dir.mkdir();
 			File fromfile = new File(dir.getPath()+"//"+shtegu);
 			
+			if(!fromfile.exists()) {
+				System.out.println("Gabim: Fajlli "+shtegu+" nuk ekziston");
+				System.exit(1);
+			}
+			
 			//fute file-n ne nje document
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -167,7 +172,7 @@ public class import_key {
 			File fromfile = new File(dir.getPath()+"//"+shtegu);
 
 			if(!fromfile.exists()) {
-				System.out.println("Gabim: Fajlli i dhene "+fromfile.getPath()+"nuk ekziston");
+				System.out.println("Gabim: Fajlli i dhene "+fromfile.getPath()+" nuk ekziston");
 				System.exit(1);
 			}
 			
