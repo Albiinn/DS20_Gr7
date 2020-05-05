@@ -1,8 +1,8 @@
 # DS20_Gr7
 
-DS20_Gr7 është nje projekt ne te cilin kemi shkruar një console program me emrin ds i cili pranon komanda përmes
-argumenteve. Ky program do t’i analizojë argumentet, dhe varësisht nga përmbajtja e tyre do ta
-ekzekutojë ndonjërën prej komandave të specifikuara.
+DS20_Gr7 eshte nje projekt ne te cilin kemi shkruar nje console program me emrin ds i cili pranon komanda permes
+argumenteve. Ky program do t’i analizoje argumentet, dhe varesisht nga permbajtja e tyre do te
+ekzekutoje ndonjeren prej komandave te specifikuara.
 Programi eshte i shenuar ne gjuhen programuese Java
 
 ## Pershkrimi i komandave:
@@ -15,6 +15,7 @@ Programi eshte i shenuar ne gjuhen programuese Java
 - Case komanda e konverton tekstin ne madhesine e dhene, e cila mund te jete: lower, upper, capitalize, inverse, alternating, sentence.
 
 ## Hapat per ekzekutimin e programit:
+### Faza 1
 
 1. Hapeni nje folder ne nje direction psh ne Desktop, dhe i vendosni emrin CryptoAlgorithms.
 2. Tek ky folder, hapini 4 Text Document ku secilit file i vendosni emrin e klases perkatese dhe i ndryshoni file extension-in nga .txt ne .java.
@@ -38,7 +39,32 @@ Programi eshte i shenuar ne gjuhen programuese Java
  java CryptoAlgorithms/ds case inverse &lt;text>\
  java CryptoAlgorithms/ds case alternating &lt;text>\
  java CryptoAlgorithms/ds case sentence &lt;text>
+ 
+ ### Faza 2
+ 
+ 1. Ndiqni hapin 1 te Fazes 1
+ 2. Tek ky folder, hapini 10 Text Document ku secilit file i vendosni emrin e klases perkatese dhe i ndryshoni file extension-in   nga .txt ne .java.
+ 3. Ndiqni hapat 3-4 te Fazes 1
+ 
+ - Per te krijuar nje cift te celesave publik/privat te RSA me emrat <name>.xml dhe <name>.pub.xml brenda
+direktoriumit të celesave keys, atehere shenoni:\
+ java CryptoAlgorithms/ds create-user &lt;name>
+ 
+ - Per te larguar te gjithe celesat ekzistues te shfrytezuesit, shenoni:\
+ java CryptoAlgorithms/ds delete-user &lt;name>
+ 
+ - Per te eksportuar celesin publik ose privat te shfrytezuesit nga direktoriumi i celesave, shenoni:\
+ java CryptoAlgorithms/ds export-key &lt;public | private> &lt;name> [file]
+ 
+ - Per te importuar celesin publik ose privat te shfrytezuesit nga shtegu i dhene e per te vendosur ne direktoriumin
+e celesave, shenoni:\
+java CryptoAlgorithms/ds import-key &lt;name> &lt;path> 
 
+- Per te shkruar nje mesazh te enkriptuar te dedikuar per nje shfrytezues, shenoni:\
+java CryptoAlgorithms/ds write-message &lt;name> &lt;message> [file]
+
+- Per te dekriptuar dhe shfaqur ne console mesazhin e enkriptuar, shenoni:\
+java CryptoAlgorithms/ds read-message &lt;encrypted-message>
 
 ## Shembuj nga rezultatet e ekzekutimit:
 ### Komanda beale:
