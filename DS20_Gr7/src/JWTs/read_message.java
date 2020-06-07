@@ -33,8 +33,6 @@ import org.xml.sax.SAXException;
 
 public class read_message {
 	
-	private static int len;
-	
 	private static int a;
 	
 	private static Cipher decryptCipher;
@@ -42,7 +40,7 @@ public class read_message {
 	public static void Decrypt(String mesazhi) throws ParserConfigurationException, SAXException, IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, InvalidAlgorithmParameterException {
 		
 		byte[] decodedemri;
-		String emri;
+		String emri = "";
 		
 		byte[] decodediv;
 		
@@ -51,7 +49,7 @@ public class read_message {
 		byte[] decodedEncryptedMessage;
 		
 		byte[] decodedsander;
-		String sander = null;
+		String sander = "";
 		
 		byte[] decodedSignature = null;
 		
@@ -85,8 +83,6 @@ public class read_message {
 	
 			decodedEncryptedMessage = Base64.getDecoder().decode(sa.get(3));
 			
-			len = sa.size();
-			
 			if(sa.size()>4) {
 			
 			decodedsander = Base64.getDecoder().decode(sa.get(4));
@@ -111,8 +107,6 @@ public class read_message {
 	
 			decodedEncryptedMessage = Base64.getDecoder().decode(a[3]);
 			
-			len = a.length;
-			
 			if(a.length>4) {
 			
 			decodedsander = Base64.getDecoder().decode(a[4]);
@@ -134,7 +128,7 @@ public class read_message {
 		System.out.println("Marresi: "+emri);
 		System.out.println("Mesazhi: "+M);
 		
-		if(len == 6) {
+		if(sander.length() != 0) {
 		
 		System.out.println("Derguesi: "+sander);
 			
@@ -239,8 +233,7 @@ public class read_message {
 		
 		}
 	}
-	
-	
+
 	private static RSAPrivateKeySpec getPrivKey(String emri) throws ParserConfigurationException, SAXException, IOException {
 		
 		//gjeje file-n

@@ -41,14 +41,28 @@ public class write_message {
 		Base64.Encoder encoder = Base64.getEncoder(); 
 		
 		//get user name
-		String[] parts = token.split("\\.");
-		String pl = new String(Base64.getUrlDecoder().decode(parts[1]));
+		String[] parts;
+		String pl;
+				
+		JSONObject payload;
+		String sender = null;
+				
+		//get user private key
+		RSAPrivateKeySpec SECRET_KEY = null;
 		
-		JSONObject payload = new JSONObject(pl);
-		String sender = payload.getString("sub");
+		if(token.length() != 0 || !token.isEmpty()) {
+		
+		//get user name
+		parts = token.split("\\.");
+		pl = new String(Base64.getUrlDecoder().decode(parts[1]));
+		
+		payload = new JSONObject(pl);
+		sender = payload.getString("sub");
 		
 		//get user private key
-		RSAPrivateKeySpec SECRET_KEY = getPrivKey(sender);
+		SECRET_KEY = getPrivKey(sender);
+		
+		}
 		
 		SecureRandom sr = new SecureRandom();
 		byte[] IV = new byte[8];
@@ -76,21 +90,31 @@ public class write_message {
 		String EncryptedKey = encoder.encodeToString(RSAencrypt(PubKey, key));
 		String part1 = encoder.encodeToString(emri.getBytes("UTF8"));
 		String part2 = encoder.encodeToString(IV);
-		String part5 = encoder.encodeToString(sender.getBytes("UTF8"));
-		String part6 = encoder.encodeToString(RSASignature(SECRET_KEY, DESencrypt(mesazhi, iv, key)));
+		String part5 = "";
+		String part6 = "";
+		
+		if(token.length() != 0 || !token.isEmpty()) {
+		
+		part5 = encoder.encodeToString(sender.getBytes("UTF8"));
+		part6 = encoder.encodeToString(RSASignature(SECRET_KEY, DESencrypt(mesazhi, iv, key)));
+		
+		}
 		
 		if(shtegu.contains(".txt")) {
 			
 			File file = new File(shtegu);
 			PrintWriter input = new PrintWriter(file);
+			
 			input.println(part1);				//emri
 			input.println(part2);				//iv tek DES
 			input.println(EncryptedKey);		//celesi i DES
 			input.println(EncryptedMessage);	//mesazhi
 			input.println(part5);				//sander
 			input.println(part6);				//signature
+			
 			input.close();
 			System.out.println("Mesazhi i enkriptuar u ruajt ne fajllin "+shtegu+".");
+			
 		}
 		
 		else {
