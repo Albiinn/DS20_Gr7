@@ -1,4 +1,4 @@
-package CryptoAlgorithms;
+package JWTs;
 
 import java.io.BufferedReader;
 import java.io.File;

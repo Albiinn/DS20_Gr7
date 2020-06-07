@@ -1,4 +1,4 @@
-package CryptoAlgorithms;
+package JWTs;
 
 import java.io.File;
 

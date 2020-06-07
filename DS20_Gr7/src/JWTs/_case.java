@@ -1,4 +1,4 @@
-package CryptoAlgorithms;
+package JWTs;
 class _case {
 	
 	public static void lower(String s) {

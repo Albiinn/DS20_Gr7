@@ -1,4 +1,4 @@
-package CryptoAlgorithms;
+package JWTs;
 
 class tap_code {
 	
