@@ -66,6 +66,21 @@ java CryptoAlgorithms/ds write-message &lt;name> &lt;message> [file]
 - Per te dekriptuar dhe shfaqur ne console mesazhin e enkriptuar, shenoni:\
 java CryptoAlgorithms/ds read-message &lt;encrypted-message>
 
+### Faza 3
+
+Per te ekzekutuar kete faze, e cila gjithashtu permbane edhe dy fazat tjera (Fazen 1 dhe fazen 2, pra tere programin), ju duhet te download-oni dhe install-oni veglen softwerike Maven.
+Hapat per instalimin dhe konfigurimin e kesaj vegle, mund ti ndiqni ne linkun: https://www.youtube.com/watch?v=3ODSQ0EpoQI.
+Pasi te keni konfiguruar veglen Maven, ndiqni hapat ne vijim:
+1. Hapeni terminalin (cmd apo git bash) ne Desktop
+2. Shenoni "mvn archetype:generate -DgroupId=JWTs -DartifactId=DS20_Gr7 -DarchetypeArtifactId=maven-archetype-quickstart-DinteractiveMode=false", ku -DgroupId paraqet emrin e package dhe -DartifactId emrin e projektit.
+3. Ne Desktop eshte krijuar projekti me emrin DS20_Gr7. Klikoni ne kete projekte dhe ne file-n pom.xml, se pari fshini pjesen e kodit qe fillon me &lt;dependencies> dhe mbaron me &lt;/dependencies>. Pastaj, kopjoni kodin ndermjet rreshtit 17 dhe 72 te file-s pom.xml qe ndodhet ne github dhe vendoseni tek file pom.xml i projektit te krijuar.
+4. Ne projektin e krijuar shkoni tek pathi src\main\java\JWTs dhe fshijeni file-n App.java.
+5. Tani, krijoni 12 txt file me emrat perkates sikurse qe jane ne github, dhe nderroni extensionin nga .txt ne .java.
+6. Kopjoni kodin burimor nga github dhe venosini ne java file-t perkatese.
+7. Hapeni terminalin ne projektin e krijuar dhe shenoni "mvn assembly:assembly -DdescriptorId=jar-with-dependencies"
+8. Eshte shtuar nje follder i ri ne projekt me emrin "target". Hyni ne kete follder dhe .jar file-n me emer "DS20_Gr7-1.0-SNAPSHOT-jar-with-dependencies" emertone ne "ds.jar".
+9. Ne terminalin e hapur, tani mund ti beni run cilat do komanda "java -jar target/ds.jar &lt;komandat me argumente>
+
 ## Shembuj nga rezultatet e ekzekutimit:
 ### Komanda beale:
 
