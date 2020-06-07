@@ -17,10 +17,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-
 public class export_key {
-	
-	public static Document getContentFromPrivateFile(File fromfile, Document doc) throws ParserConfigurationException, SAXException, IOException {
+
+public static Document getContentFromPrivateFile(File fromfile, Document doc) throws ParserConfigurationException, SAXException, IOException {
 		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -130,9 +129,10 @@ public class export_key {
 				Transformer transformer = transformerFactoryPub.newTransformer();
 				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 				DOMSource source = new DOMSource(doc);
+				
 				StreamResult result;
 				
-				File dir = new File("c://Users//hp//Desktop//exported_keys");
+				File dir = new File("c://Users//hp//Desktop//exported_keys"); 
 				dir.mkdir();
 				File file = new File(dir.getPath()+"//"+shtegu.replace(".xml", "")+".pub.xml");
 				
@@ -175,7 +175,7 @@ public class export_key {
 				dir.mkdir();
 				File file = new File(dir.getPath()+"//"+shtegu);
 				
-				if(shtegu.equals("a")) {
+				if(shtegu.equals("a")) { 
 					result = new StreamResult(System.out);
 					transformer.transform(source, result);
 				}
@@ -185,4 +185,5 @@ public class export_key {
 					transformer.transform(source, result);
 				}
 	}
+	
 }

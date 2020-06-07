@@ -1,5 +1,6 @@
 package JWTs;
-class _case {
+
+public class _case {
 	
 	public static void lower(String s) {
 		System.out.println(s.toLowerCase());
@@ -73,4 +74,5 @@ class _case {
 		if(a[a.length-1]!='.' || a[a.length-1]!='!' || a[a.length-1]!='?')
 		System.out.print(".");
 		}
+	
 }

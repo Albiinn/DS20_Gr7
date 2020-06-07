@@ -2,6 +2,7 @@ package JWTs;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -9,13 +10,17 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Base64;
+import java.util.Scanner;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,7 +31,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-//third-party libraries
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -36,6 +40,95 @@ public class create_user {
 	private static RSAPrivateKeySpec rsaPrivKeySpec = null;
 	private static RSAPrivateCrtKey rsaPrivCrtKey = null;
 	
+	//gjenerimi i salt
+	private static byte[] getSalt() throws NoSuchAlgorithmException {
+		
+	        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+	        byte[] salt = new byte[16];
+	        sr.nextBytes(salt);
+	        return salt;
+	}
+	
+	//hash passwordi
+	private static String generateStorngPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		
+        int iterations = 65536;	//It indicates how many iterations that this algorithm run for, increasing the time it takes to produce the hash.
+        char[] chars = password.toCharArray();
+        byte[] salt = getSalt();
+         
+        PBEKeySpec spec = new PBEKeySpec(chars, salt, iterations, 128);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        
+        byte[] hash = skf.generateSecret(spec).getEncoded();
+        
+        Base64.Encoder encoder = Base64.getEncoder();
+        
+        return encoder.encodeToString(salt)+"."+encoder.encodeToString(hash);
+        
+    }
+	
+	//krijo userin me username dhe password
+	public static void user(String emri) throws FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+		
+		//krijimi i folderit users
+		File U = new File("c://U");
+		U.mkdir();
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.print("Jepni fjalekalimin: ");
+		String password = input.next();
+		
+		String symbols = "0123456789!@#$%^&*()_+[];',./?><|:}{";
+		int k=0;
+		
+		if(password.length()<6) {
+			System.out.println("Gabim: Fjalekalimi duhet te permbaje se paku 6 karaktere.");
+			System.exit(1);
+		}
+		
+		for(int i=0; i<password.toCharArray().length; i++) {
+			
+			for(int j=0; j<symbols.toCharArray().length; j++) {
+				
+				if(((password.toCharArray())[i] == symbols.toCharArray()[j])) {
+					
+					k++;
+					
+					}
+			}
+		}
+		
+		
+		System.out.print("Perserit fjalekalimin: ");
+		String repassword = input.next();
+		
+		input.close();
+		
+		if(!password.equals(repassword)) {
+			System.out.println("Gabim: Fjalekalimet nuk perputhen.");
+			System.exit(1);
+		}
+		
+		
+		if(k==0) {
+			System.out.println("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+			System.exit(1);
+		}
+		
+		String hash = generateStorngPasswordHash(password);
+		
+		File file = new File(U.getPath()+"//"+emri+".txt");
+		PrintWriter pw = new PrintWriter(file);
+		
+		pw.println(hash);
+		
+		System.out.println("Eshte krijuar shfrytezuesi "+emri);
+		
+		pw.close();
+		
+	}
+	
 	//konstruktori qe thirr metoden KEY, per gjenerim te celesave
 	public create_user() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		KEY();
@@ -43,15 +136,16 @@ public class create_user {
 	
 	//Gjenerimi i pales se celesave publik dhe privat
 	public void KEY() throws NoSuchAlgorithmException, InvalidKeySpecException {
-		
 		KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 		keyPairGenerator.initialize(2048);
 		KeyPair keyPair = keyPairGenerator.generateKeyPair();
 		PublicKey publicKey = keyPair.getPublic();
 		PrivateKey privateKey = keyPair.getPrivate();
 		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		
 		rsaPubKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
 		rsaPrivKeySpec = keyFactory.getKeySpec(privateKey, RSAPrivateKeySpec.class);
+		
 		rsaPrivCrtKey = createCrtKey(rsaPubKeySpec, rsaPrivKeySpec);
 	}
 	
@@ -112,11 +206,13 @@ public class create_user {
 	    KeyFactory kf = KeyFactory.getInstance("RSA");
 	    
 	    return (RSAPrivateCrtKey) kf.generatePrivate(keySpec);
-
 	}
 	
 	//Ruajtja e celesave publik e privat ne xml fajlla te ndare
-	public static void MbusheFajllin(String emri) throws ParserConfigurationException, TransformerException, FileNotFoundException, NoSuchAlgorithmException {
+	public static void MbusheFajllin(String emri) throws ParserConfigurationException, TransformerException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
+		
+		//krijimi i userit
+		user(emri);
 		
 		Base64.Encoder encoder = Base64.getEncoder();
 		
@@ -211,6 +307,7 @@ public class create_user {
 		transformerPub.transform(sourcePub, resultPub);
 
 	  }
+	
 }
 	
 

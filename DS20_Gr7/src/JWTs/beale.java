@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class beale {
-	
+
 	public static void encrypt(String path, String plaintext) throws Exception {
 		Scanner input=null;
 		String emri=null;
@@ -120,4 +120,5 @@ public class beale {
 		bufferReader.close();
 		return wordcount;
 	}
+	
 }

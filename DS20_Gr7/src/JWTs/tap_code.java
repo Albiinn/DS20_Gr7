@@ -1,7 +1,7 @@
 package JWTs;
 
-class tap_code {
-	
+public class tap_code {
+
 	public static void encode(String plaintext) {
 		char[][] tabela=matrica();
 		String s=plaintext.toLowerCase(); 
@@ -81,4 +81,5 @@ class tap_code {
 	  }
 		return tabela;
 	}
+	
 }
