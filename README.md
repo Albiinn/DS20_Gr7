@@ -1,9 +1,13 @@
 # DS20_Gr7
 
-DS20_Gr7 eshte nje projekt ne te cilin kemi shkruar nje console program me emrin ds i cili pranon komanda permes
-argumenteve. Ky program do t’i analizoje argumentet, dhe varesisht nga permbajtja e tyre do te
+DS20_Gr7 eshte nje projekt ne te cilin kemi shkruar nje console program i cili pranon komanda permes
+argumenteve. Ky program do ti analizoje argumentet, dhe varesisht nga permbajtja e tyre do te
 ekzekutoje ndonjeren prej komandave te specifikuara.
 Programi eshte i shenuar ne gjuhen programuese Java
+
+Programin mund ta shkarkoni si zip:
+[ds.zip](https://github.com/Albiinn/DS20_Gr7/files/6480667/ds.zip)
+
 
 ## Pershkrimi i komandave:
 
