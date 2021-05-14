@@ -6,7 +6,7 @@ ekzekutoje ndonjeren prej komandave te specifikuara.
 Programi eshte i shenuar ne gjuhen programuese Java
 
 Programin mund ta shkarkoni si zip:
-[ds.zip](https://github.com/Albiinn/DS20_Gr7/files/6480667/ds.zip)
+[ds.zip](https://github.com/Albiinn/DS20_Gr7/files/6480667/ds.zip), ndersa pershkrimin e komandave mund ta gjeni me poshte.
 
 
 ## Pershkrimi i komandave:
