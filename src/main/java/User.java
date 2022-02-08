@@ -30,7 +30,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class User {
-
     private static RSAPublicKeySpec rsaPublicKeySpec;
     private static RSAPrivateKeySpec rsaPrivateKeySpec;
     private static RSAPrivateCrtKey rsaPrivateCrtKey;
@@ -49,7 +48,6 @@ public class User {
     }
 
     private static RSAPrivateCrtKey createCrtKey(RSAPublicKeySpec rsaPublicKeySpec, RSAPrivateKeySpec rsaPrivateKeySpec) throws NoSuchAlgorithmException, InvalidKeySpecException {
-
         BigInteger e = rsaPublicKeySpec.getPublicExponent();
         BigInteger d = rsaPrivateKeySpec.getPrivateExponent();
         BigInteger n = rsaPublicKeySpec.getModulus();
@@ -101,22 +99,18 @@ public class User {
 
     public static void createUser(String name) throws ParserConfigurationException, TransformerException, FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
         key();
-
-        //create keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 
-        //create key files
         File filePub = new File(keys.getPath() + "//" + name + ".pub.xml");
         File file = new File(keys.getPath() + "//" + name + ".xml");
 
         if (file.exists() || filePub.exists()) {
             System.out.println("Wrong! " + name + " key exist.");
-//            System.exit(1);
+            System.exit(1);
         }
 
         createUserTxt(name);
-
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
@@ -139,7 +133,6 @@ public class User {
     }
 
     public static void createUserTxt(String name) throws FileNotFoundException, NoSuchAlgorithmException, InvalidKeySpecException {
-        //Create directory
         File directory = new File("c://U");
         directory.mkdir();
 
@@ -149,7 +142,7 @@ public class User {
 
         if (password.length() < 6) {
             System.out.println("Wrong! Password should contain at least six letters!");
-//            System.exit(1);
+            System.exit(1);
         }
 
         String symbols = "0123456789!@#$%^&*()_+[];',./?><|:}{";
@@ -164,7 +157,7 @@ public class User {
 
         if (countSymbols == 0) {
             System.out.println("Wrong! Password should contain at least one number or symbol!");
-//            System.exit(1);
+            System.exit(1);
         }
 
         System.out.print("Repeat password: ");
@@ -173,7 +166,7 @@ public class User {
 
         if (!password.equals(repeatPassword)) {
             System.out.println("Wrong! Repeated password doesn't match the first password!");
-//            System.exit(1);
+            System.exit(1);
         }
 
         String hash = generateStrongPasswordHash(password);
@@ -275,7 +268,6 @@ public class User {
 
     public static void deleteUser(String name) {
         delete(name);
-
         File directory = new File("c://keys");
         directory.mkdir();
 

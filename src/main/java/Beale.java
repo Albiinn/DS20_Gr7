@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Beale {
 
     public static void encrypt(String path, String plaintext) throws Exception {
-        Scanner scanner = new Scanner(createAndWriteToFile(path));;
+        Scanner scanner = new Scanner(createAndWriteToFile(path));
+        ;
         String name;
         int result = 1;
         char[] letter = plaintext.toCharArray();
@@ -84,6 +85,7 @@ public class Beale {
         output.close();
         return file;
     }
+
     public static int countWord(String path) throws Exception {
         int wordcount = 0;
         String line;

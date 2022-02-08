@@ -43,7 +43,6 @@ public class Login {
     }
 
     public static String getHashPassword(String name) throws FileNotFoundException {
-        //user directory
         File U = new File("c://U");
         U.mkdir();
 
@@ -91,12 +90,10 @@ public class Login {
     }
 
     private static RSAPrivateKeySpec getPrivateKey(String name) throws ParserConfigurationException, SAXException, IOException {
-        //keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 
         File fromFile = new File(keys.getPath() + "//" + name + ".xml");
-
         if (!fromFile.exists()) {
             System.out.println("Wrong! " + fromFile.getPath() + " private key doesn't exist!");
             System.exit(1);

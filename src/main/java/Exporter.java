@@ -25,7 +25,6 @@ public class Exporter {
     }
 
     public static void copyToPrivateFile(String name, String path) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-        //keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 
@@ -36,14 +35,12 @@ public class Exporter {
         }
 
         Document doc = getContentFromPrivateFile(fromFile);
-
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(doc);
         StreamResult result;
 
-        //exported_keys directory
         File dir = new File("c://Users//hp//Desktop//exported_keys");
         dir.mkdir();
 
@@ -111,7 +108,6 @@ public class Exporter {
     }
 
     public static void copyToPublicFile(String name, String path) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-        //keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 
@@ -122,18 +118,16 @@ public class Exporter {
         }
 
         Document doc = getContentFromPublicFile(fromFile);
-
         TransformerFactory transformerFactoryPub = TransformerFactory.newInstance();
         Transformer transformer = transformerFactoryPub.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(doc);
 
-        StreamResult result;
-
         File dir = new File("c://Users//hp//Desktop//exported_keys");
         dir.mkdir();
         File file = new File(dir.getPath() + "//" + path.replace(".xml", "") + ".pub.xml");
 
+        StreamResult result;
         if (path.equals("a")) {
             result = new StreamResult(System.out);
         } else {
@@ -144,7 +138,6 @@ public class Exporter {
     }
 
     public static Document getContentFromPublicFile(File fromFile) throws ParserConfigurationException, SAXException, IOException {
-
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document fromDoc = dBuilder.parse(fromFile);

@@ -141,7 +141,6 @@ public class MessageWriter {
     }
 
     private static RSAPrivateKeySpec getPublicKey(String name) throws ParserConfigurationException, SAXException, IOException {
-        //keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 

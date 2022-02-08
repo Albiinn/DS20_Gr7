@@ -59,7 +59,6 @@ public class Status {
     }
 
     private static void checkUser(String name) {
-        //user directory
         File U = new File("c://U");
         U.mkdir();
 
@@ -71,7 +70,6 @@ public class Status {
     }
 
     private static RSAPublicKeySpec getPublicKey(String emri) throws ParserConfigurationException, SAXException, IOException {
-        //keys directory
         File keys = new File("c://keys");
         keys.mkdir();
 

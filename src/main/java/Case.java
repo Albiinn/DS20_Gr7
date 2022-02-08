@@ -1,13 +1,4 @@
 public class Case {
-
-    public static void lowerCase(String s) {
-        System.out.println(s.toLowerCase());
-    }
-
-    public static void upperCase(String s) {
-        System.out.println(s.toUpperCase());
-    }
-
     public static void capitalize(String s) {
         System.out.println(s.toLowerCase().replace(s.charAt(0), Character.toUpperCase(s.charAt(0))));
     }

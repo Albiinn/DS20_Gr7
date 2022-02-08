@@ -71,7 +71,6 @@ public class Importer {
     }
 
     public static int privateOrPublic(String path) throws ParserConfigurationException, SAXException, IOException, TransformerException {
-        //exported_keys directory
         File dir = new File("c://Users//hp//Desktop//exported_keys");
         dir.mkdir();
 
